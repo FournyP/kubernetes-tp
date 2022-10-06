@@ -1,6 +1,9 @@
 package schema
 
-import "entgo.io/ent"
+import (
+	"entgo.io/ent"
+	"entgo.io/ent/schema/field"
+)
 
 // Text holds the schema definition for the Text entity.
 type Text struct {
@@ -9,7 +12,11 @@ type Text struct {
 
 // Fields of the Text.
 func (Text) Fields() []ent.Field {
-	return nil
+	return []ent.Field{
+		field.String("name").
+			Default("unknown"),
+		field.String("text"),
+	}
 }
 
 // Edges of the Text.
