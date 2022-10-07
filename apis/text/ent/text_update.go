@@ -10,8 +10,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/FournyP/kubernetes-tp/ent/predicate"
-	"github.com/FournyP/kubernetes-tp/ent/text"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/predicate"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/text"
 )
 
 // TextUpdate is the builder for updating Text entities.
@@ -33,14 +33,6 @@ func (tu *TextUpdate) SetName(s string) *TextUpdate {
 	return tu
 }
 
-// SetNillableName sets the "name" field if the given value is not nil.
-func (tu *TextUpdate) SetNillableName(s *string) *TextUpdate {
-	if s != nil {
-		tu.SetName(*s)
-	}
-	return tu
-}
-
 // SetText sets the "text" field.
 func (tu *TextUpdate) SetText(s string) *TextUpdate {
 	tu.mutation.SetText(s)
@@ -59,12 +51,18 @@ func (tu *TextUpdate) Save(ctx context.Context) (int, error) {
 		affected int
 	)
 	if len(tu.hooks) == 0 {
+		if err = tu.check(); err != nil {
+			return 0, err
+		}
 		affected, err = tu.sqlSave(ctx)
 	} else {
 		var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 			mutation, ok := m.(*TextMutation)
 			if !ok {
 				return nil, fmt.Errorf("unexpected mutation type %T", m)
+			}
+			if err = tu.check(); err != nil {
+				return 0, err
 			}
 			tu.mutation = mutation
 			affected, err = tu.sqlSave(ctx)
@@ -104,6 +102,16 @@ func (tu *TextUpdate) ExecX(ctx context.Context) {
 	if err := tu.Exec(ctx); err != nil {
 		panic(err)
 	}
+}
+
+// check runs all checks and user-defined validators on the builder.
+func (tu *TextUpdate) check() error {
+	if v, ok := tu.mutation.Name(); ok {
+		if err := text.NameValidator(v); err != nil {
+			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "Text.name": %w`, err)}
+		}
+	}
+	return nil
 }
 
 func (tu *TextUpdate) sqlSave(ctx context.Context) (n int, err error) {
@@ -163,14 +171,6 @@ func (tuo *TextUpdateOne) SetName(s string) *TextUpdateOne {
 	return tuo
 }
 
-// SetNillableName sets the "name" field if the given value is not nil.
-func (tuo *TextUpdateOne) SetNillableName(s *string) *TextUpdateOne {
-	if s != nil {
-		tuo.SetName(*s)
-	}
-	return tuo
-}
-
 // SetText sets the "text" field.
 func (tuo *TextUpdateOne) SetText(s string) *TextUpdateOne {
 	tuo.mutation.SetText(s)
@@ -196,12 +196,18 @@ func (tuo *TextUpdateOne) Save(ctx context.Context) (*Text, error) {
 		node *Text
 	)
 	if len(tuo.hooks) == 0 {
+		if err = tuo.check(); err != nil {
+			return nil, err
+		}
 		node, err = tuo.sqlSave(ctx)
 	} else {
 		var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 			mutation, ok := m.(*TextMutation)
 			if !ok {
 				return nil, fmt.Errorf("unexpected mutation type %T", m)
+			}
+			if err = tuo.check(); err != nil {
+				return nil, err
 			}
 			tuo.mutation = mutation
 			node, err = tuo.sqlSave(ctx)
@@ -247,6 +253,16 @@ func (tuo *TextUpdateOne) ExecX(ctx context.Context) {
 	if err := tuo.Exec(ctx); err != nil {
 		panic(err)
 	}
+}
+
+// check runs all checks and user-defined validators on the builder.
+func (tuo *TextUpdateOne) check() error {
+	if v, ok := tuo.mutation.Name(); ok {
+		if err := text.NameValidator(v); err != nil {
+			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "Text.name": %w`, err)}
+		}
+	}
+	return nil
 }
 
 func (tuo *TextUpdateOne) sqlSave(ctx context.Context) (_node *Text, err error) {

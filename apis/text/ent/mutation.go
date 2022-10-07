@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/FournyP/kubernetes-tp/ent/predicate"
-	"github.com/FournyP/kubernetes-tp/ent/text"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/predicate"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/text"
 
 	"entgo.io/ent"
 )

@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/FournyP/kubernetes-tp/ent/migrate"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/migrate"
 
-	"github.com/FournyP/kubernetes-tp/ent/text"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/text"
 
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/sql"

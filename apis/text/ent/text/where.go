@@ -4,7 +4,7 @@ package text
 
 import (
 	"entgo.io/ent/dialect/sql"
-	"github.com/FournyP/kubernetes-tp/ent/predicate"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/predicate"
 )
 
 // ID filters vertices based on their ID field.

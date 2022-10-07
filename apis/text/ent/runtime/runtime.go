@@ -2,7 +2,7 @@
 
 package runtime
 
-// The schema-stitching logic is generated in github.com/FournyP/kubernetes-tp/ent/runtime.go
+// The schema-stitching logic is generated in github.com/FournyP/kubernetes-tp/apis/text/ent/runtime.go
 
 const (
 	Version = "v0.11.3"                                         // Version of ent codegen.

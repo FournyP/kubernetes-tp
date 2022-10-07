@@ -3,8 +3,8 @@
 package ent
 
 import (
-	"github.com/FournyP/kubernetes-tp/ent/schema"
-	"github.com/FournyP/kubernetes-tp/ent/text"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/schema"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/text"
 )
 
 // The init function reads all schema descriptors with runtime code
@@ -15,6 +15,6 @@ func init() {
 	_ = textFields
 	// textDescName is the schema descriptor for name field.
 	textDescName := textFields[0].Descriptor()
-	// text.DefaultName holds the default value on creation for the name field.
-	text.DefaultName = textDescName.Default.(string)
+	// text.NameValidator is a validator for the "name" field. It is called by the builders before save.
+	text.NameValidator = textDescName.Validators[0].(func(string) error)
 }

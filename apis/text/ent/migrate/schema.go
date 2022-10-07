@@ -11,7 +11,7 @@ var (
 	// TextsColumns holds the columns for the "texts" table.
 	TextsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "name", Type: field.TypeString, Default: "unknown"},
+		{Name: "name", Type: field.TypeString},
 		{Name: "text", Type: field.TypeString},
 	}
 	// TextsTable holds the schema information for the "texts" table.

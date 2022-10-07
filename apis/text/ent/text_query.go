@@ -10,8 +10,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/FournyP/kubernetes-tp/ent/predicate"
-	"github.com/FournyP/kubernetes-tp/ent/text"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/predicate"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/text"
 )
 
 // TextQuery is the builder for querying Text entities.

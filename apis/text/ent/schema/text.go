@@ -14,7 +14,7 @@ type Text struct {
 func (Text) Fields() []ent.Field {
 	return []ent.Field{
 		field.String("name").
-			Default("unknown"),
+			NotEmpty(),
 		field.String("text"),
 	}
 }

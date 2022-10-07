@@ -9,7 +9,7 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/FournyP/kubernetes-tp/ent/text"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/text"
 )
 
 // TextCreate is the builder for creating a Text entity.
@@ -22,14 +22,6 @@ type TextCreate struct {
 // SetName sets the "name" field.
 func (tc *TextCreate) SetName(s string) *TextCreate {
 	tc.mutation.SetName(s)
-	return tc
-}
-
-// SetNillableName sets the "name" field if the given value is not nil.
-func (tc *TextCreate) SetNillableName(s *string) *TextCreate {
-	if s != nil {
-		tc.SetName(*s)
-	}
 	return tc
 }
 
@@ -50,7 +42,6 @@ func (tc *TextCreate) Save(ctx context.Context) (*Text, error) {
 		err  error
 		node *Text
 	)
-	tc.defaults()
 	if len(tc.hooks) == 0 {
 		if err = tc.check(); err != nil {
 			return nil, err
@@ -114,18 +105,15 @@ func (tc *TextCreate) ExecX(ctx context.Context) {
 	}
 }
 
-// defaults sets the default values of the builder before save.
-func (tc *TextCreate) defaults() {
-	if _, ok := tc.mutation.Name(); !ok {
-		v := text.DefaultName
-		tc.mutation.SetName(v)
-	}
-}
-
 // check runs all checks and user-defined validators on the builder.
 func (tc *TextCreate) check() error {
 	if _, ok := tc.mutation.Name(); !ok {
 		return &ValidationError{Name: "name", err: errors.New(`ent: missing required field "Text.name"`)}
+	}
+	if v, ok := tc.mutation.Name(); ok {
+		if err := text.NameValidator(v); err != nil {
+			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "Text.name": %w`, err)}
+		}
 	}
 	if _, ok := tc.mutation.Text(); !ok {
 		return &ValidationError{Name: "text", err: errors.New(`ent: missing required field "Text.text"`)}
@@ -190,7 +178,6 @@ func (tcb *TextCreateBulk) Save(ctx context.Context) ([]*Text, error) {
 	for i := range tcb.builders {
 		func(i int, root context.Context) {
 			builder := tcb.builders[i]
-			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*TextMutation)
 				if !ok {

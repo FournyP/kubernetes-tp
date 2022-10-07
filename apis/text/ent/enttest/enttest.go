@@ -5,12 +5,12 @@ package enttest
 import (
 	"context"
 
-	"github.com/FournyP/kubernetes-tp/ent"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent"
 	// required by schema hooks.
-	_ "github.com/FournyP/kubernetes-tp/ent/runtime"
+	_ "github.com/FournyP/kubernetes-tp/apis/text/ent/runtime"
 
 	"entgo.io/ent/dialect/sql/schema"
-	"github.com/FournyP/kubernetes-tp/ent/migrate"
+	"github.com/FournyP/kubernetes-tp/apis/text/ent/migrate"
 )
 
 type (
