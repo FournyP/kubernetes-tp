@@ -1,0 +1,7 @@
+L'event clique sur le bouton de la page web devra déployer un contenainer unique pour le client.
+Quand on run le fichier Main.go celui créé un déployement nginx en appelant la route "/create/container/:name".
+
+kubectl get pods
+kubectl expose deployment demo-hello --type=LoadBalancer  --name=monservice
+kubectl get svc
+minikube service monservice --url
