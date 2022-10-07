@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "name": "{{ NAME }}"
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "app": "demo"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "demo"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "nginx",
+            "image": "nginx:1.19.4-alpine",
+            "ports": [
+              {
+                "name": "http",
+                "protocol": "TCP",
+                "containerPort": 8080
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
