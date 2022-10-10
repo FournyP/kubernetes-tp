@@ -26,22 +26,22 @@ jobs:
       with:
         context: ./front/
         push: true
-        tags: FournyP/kubernetes-tp-front:latest
+        tags: pfourny/kubernetes-tp-front:latest
     - name: Build and push api text
       uses: docker/build-push-action@v3
       with:
         context: ./apis/text/
         push: true
-        tags: FournyP/kubernetes-tp-api-text:latest
+        tags: pfourny/kubernetes-tp-api-text:latest
     - name: Build and push api image
       uses: docker/build-push-action@v3
       with:
         context: ./apis/image/
         push: true
-        tags: FournyP/kubernetes-tp-api-image:latest
+        tags: pfourny/kubernetes-tp-api-image:latest
     - name: Build and push api client
       uses: docker/build-push-action@v3
       with:
         context: ./apis/client/
         push: true
-        tags: FournyP/kubernetes-tp-api-client:latest
+        tags: pfourny/kubernetes-tp-api-client:latest
