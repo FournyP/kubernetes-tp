@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubernetes-api-image
+  labels:
+    app: kubernetes-tp
+spec:
+  ports:
+    - port: 3001
+  selector:
+    app: kubernetes-tp
+    partie: kubernetes-api-image
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubernetes-api-image
+  labels:
+    app: kubernetes-tp
+spec:
+  template:
+    spec:
+      containers:
+        - name: kubernetes-api-image
+          image: pfourny/kubernetes-tp-api-image:latest
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            failureThreshold: 5 # Reessayer 5 fois
+            httpGet:
+              path: /ping
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 30 # Attendre 30s avant de tester
+            periodSeconds: 10 # Attendre 10s entre chaque essai
+            timeoutSeconds: 5 # Attendre 5s la reponse
+    metadata:
+      labels:
+        app: kubernetes-tp
+        partie: kubernetes-api-image
+  selector:
+    matchLabels:
+      app: kubernetes-tp
+      partie: kubernetes-api-image
+  strategy:
+    type: Recreate
+  replicas: 1

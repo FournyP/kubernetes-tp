@@ -1,0 +1,6 @@
+resources:
+  - api-client.yaml
+  - api-image.yaml
+  - api-text.yaml
+  - database.yaml
+  - front.yaml
