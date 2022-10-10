@@ -6,7 +6,7 @@ COPY . ./
 
 RUN go build -o ./build/program .
 
-FROM alpine:3.16
+FROM ubuntu:22.10
 
 WORKDIR /app
 

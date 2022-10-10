@@ -26,6 +26,9 @@ spec:
           name: database
           ports:
             - containerPort: 3306
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              value: root
     metadata:
       labels:
         app: kubernetes-tp
