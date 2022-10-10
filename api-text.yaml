@@ -7,10 +7,11 @@ metadata:
 spec:
   ports:
     - port: 3002
+      targetPort: 3000
   selector:
     app: kubernetes-tp
     partie: kubernetes-api-text
-  type: ClusterIP
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -35,6 +36,9 @@ spec:
             initialDelaySeconds: 30 # Attendre 30s avant de tester
             periodSeconds: 10 # Attendre 10s entre chaque essai
             timeoutSeconds: 5 # Attendre 5s la reponse
+          env:
+            - name: DATABASE_URL
+              value: "apitext:1234@tcp(database:3306)/apitext"
     metadata:
       labels:
         app: kubernetes-tp

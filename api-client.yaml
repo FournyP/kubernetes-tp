@@ -7,10 +7,11 @@ metadata:
 spec:
   ports:
     - port: 3000
+      targetPort: 3000
   selector:
     app: kubernetes-tp
     partie: kubernetes-api-client
-  type: ClusterIP
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment

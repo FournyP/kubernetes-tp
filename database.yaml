@@ -28,7 +28,13 @@ spec:
             - containerPort: 3306
           env:
             - name: MARIADB_ROOT_PASSWORD
-              value: root
+              value: "1234"
+            - name: MARIADB_USER
+              value: "apitext"
+            - name: MARIADB_PASSWORD
+              value: "1234"
+            - name: MARIADB_DATABASE
+              value: apitext
     metadata:
       labels:
         app: kubernetes-tp

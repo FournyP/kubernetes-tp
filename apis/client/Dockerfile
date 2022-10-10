@@ -11,5 +11,6 @@ FROM ubuntu:22.10
 WORKDIR /app
 
 COPY --from=builder /app/build/program ./program
+COPY --from=builder /app/build/deployment.template.json ./deployment.template.json
 
 ENTRYPOINT [ "./program" ]
