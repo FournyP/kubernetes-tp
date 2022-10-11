@@ -28,11 +28,11 @@ spec:
             - containerPort: 5173
           env:
             - name: VITE_API_IMAGE_URL
-              value: kubernetes-api-image
+              value: "http://127.0.0.1:3001/image"
             - name: VITE_API_TEXT_URL
-              value: kubernetes-api-text
+              value: "http://127.0.0.1:3002/text"
             - name: VITE_API_CLIENT_URL
-              value: kubernetes-api-client
+              value: "http://127.0.0.1:3000/create/container"
           readinessProbe:
             failureThreshold: 5 # Reessayer 5 fois
             httpGet:

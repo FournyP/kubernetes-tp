@@ -53,7 +53,7 @@ function App() {
         <button
           onClick={() => {
             axios
-              .get(`${apiClient}/?name=${input}`)
+              .get(`${apiClient}/${input}`)
               .then((res) => {});
           }}
         >
