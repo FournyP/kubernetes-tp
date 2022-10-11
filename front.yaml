@@ -26,6 +26,13 @@ spec:
           image: pfourny/kubernetes-tp-front:latest
           ports:
             - containerPort: 5173
+          env:
+            - name: VITE_API_IMAGE_URL
+              value: kubernetes-api-image
+            - name: VITE_API_TEXT_URL
+              value: kubernetes-api-text
+            - name: VITE_API_CLIENT_URL
+              value: kubernetes-api-client
           readinessProbe:
             failureThreshold: 5 # Reessayer 5 fois
             httpGet:
