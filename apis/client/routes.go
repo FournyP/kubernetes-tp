@@ -10,5 +10,5 @@ func InitRoutes(app *fiber.App) {
 	containerController := controllers.NewContainerController()
 
 	app.Get("/ping", pingController.Ping)
-	app.Post("/create/container/:name", containerController.CreateContainer)
+	app.Get("/create/container/:name", containerController.CreateContainer)
 }

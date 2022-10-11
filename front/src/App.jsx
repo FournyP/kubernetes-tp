@@ -54,7 +54,6 @@ function App() {
           onClick={() => {
             axios
               .post(`${apiClient}/${input}`)
-              .then((res) => {});
           }}
         >
           Déploiement
