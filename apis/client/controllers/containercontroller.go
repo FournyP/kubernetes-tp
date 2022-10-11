@@ -38,7 +38,7 @@ func NewContainerController() *ContainerController {
 }
 
 func (controller *ContainerController) CreateContainer(c *fiber.Ctx) error {
-	name := c.Query("name", "")
+	name := c.Params("name")
 
 	if name == "" {
 		return c.Status(fiber.StatusBadRequest).SendString("Please provide a name for the service")
