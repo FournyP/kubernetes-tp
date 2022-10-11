@@ -53,7 +53,7 @@ function App() {
         <button
           onClick={() => {
             axios
-              .get(`${apiClient}/${input}`)
+              .post(`${apiClient}/${input}`)
           }}
         >
           Déploiement
